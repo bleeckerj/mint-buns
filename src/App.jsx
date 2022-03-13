@@ -1,11 +1,12 @@
 import Install from './components/Install';
-import Home from './components/Home';
+//import Home from './components/Home';
+import BunMinter from './components/BunMinter';
 
 function App() {
   if (window.ethereum) {
-    return <Home />;
+    return <BunMinter />
   } else {
-    return <Install />
+    return <BunMinter />
   }
 }
 

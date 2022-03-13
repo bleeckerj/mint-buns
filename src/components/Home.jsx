@@ -23,6 +23,7 @@ let uriPrefix = await contract.uriPrefix()
 let tripletsJSON = [];
 let tripletsJSON_O = new Map();
 console.log(uriPrefix);
+console.log("Why is Home being called?")
 
 for (let i = 1; i <= 30; i++) {
   let result = uriPrefix.replace("ipfs://", "https://ipfs.io/ipfs/")+i+".json";
