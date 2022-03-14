@@ -3,28 +3,26 @@ import { ethers } from 'ethers';
 import Button from 'react-bootstrap/Button';
 import { Container, Col, Row, Form } from "react-bootstrap";
 import "./styles.css";
+import WalletBalance from '/src/components/WalletBalance.jsx';
+import MintButton from '/src/components/MintColor.jsx';
 
 // import Npm randomcolor Package
 import randomColor from "randomcolor";
 let provider;
 
-
-
-
-
 // import Npm clipboard-copy Package
 //import copy from "clipboard-copy";
 
 // some css
-function randomWithin (range) {
+function randomWithin(range) {
   let seed;
   if (seed === null) {
     //generate random evenly destinct number from : https://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/
     var golden_ratio = 0.618033988749895
-    var r=Math.random()
+    var r = Math.random()
     r += golden_ratio
     r %= 1
-    return Math.floor(range[0] + r*(range[1] + 1 - range[0]));
+    return Math.floor(range[0] + r * (range[1] + 1 - range[0]));
   } else {
     //Seeded random algorithm from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
     var max = range[1] || 1;
@@ -32,13 +30,13 @@ function randomWithin (range) {
     seed = (seed * 9301 + 49297) % 233280;
     var rnd = seed / 233280.0;
     return Math.floor(min + rnd * (max - min));
-}
+  }
 }
 /**
  * @param numOfSteps: Total number steps to get color, means total colors
  * @param step: The step number, means the order of the color
  */
- function rainbow(numOfSteps, step) {
+function rainbow(numOfSteps, step) {
   // This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
   // Adam Cole, 2011-Sept-14
   // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
@@ -47,13 +45,13 @@ function randomWithin (range) {
   var i = ~~(h * 6);
   var f = h * 6 - i;
   var q = 1 - f;
-  switch(i % 6){
-      case 0: r = 1; g = f; b = 0; break;
-      case 1: r = q; g = 1; b = 0; break;
-      case 2: r = 0; g = 1; b = f; break;
-      case 3: r = 0; g = q; b = 1; break;
-      case 4: r = f; g = 0; b = 1; break;
-      case 5: r = 1; g = 0; b = q; break;
+  switch (i % 6) {
+    case 0: r = 1; g = f; b = 0; break;
+    case 1: r = q; g = 1; b = 0; break;
+    case 2: r = 0; g = 1; b = f; break;
+    case 3: r = 0; g = q; b = 1; break;
+    case 4: r = f; g = 0; b = 1; break;
+    case 5: r = 1; g = 0; b = q; break;
   }
   var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
   return (c);
@@ -76,13 +74,13 @@ export default class MintColor extends Component {
       bgColor_4: "",
       display: false
     };
-    
+
     //connectWallet();
-    
+
   }
 
 
-  randomHsl() { 
+  randomHsl() {
     //return `hsla(${Math.random() * 360}, 100%, ${Math.random()*100}%, 1)`
     return `hsla(${Math.random() * 360}, 100%, 60%, 1)`
   }
@@ -108,25 +106,25 @@ export default class MintColor extends Component {
       bgColor_2: this.randomHsl()
     });
   }
-    
+
   clickColorChangeHandler_3 = (event) => {
-      //let color = randomColor();
-      this.setState({
-        bgColor_3: this.randomHsl()
-      });
-    }   
-    
-    clickColorChangeHandler_4 = (event) => {
-      //let color = randomColor();
-      this.setState({
-        bgColor_4: this.randomHsl()
-      });
-    } 
-    // color = randomColor();
-    // this.setState({
-    //   bgColor_4: color
-    // });
-  
+    //let color = randomColor();
+    this.setState({
+      bgColor_3: this.randomHsl()
+    });
+  }
+
+  clickColorChangeHandler_4 = (event) => {
+    //let color = randomColor();
+    this.setState({
+      bgColor_4: this.randomHsl()
+    });
+  }
+  // color = randomColor();
+  // this.setState({
+  //   bgColor_4: color
+  // });
+
 
   //  Click Function  Working Only  When Click on Screen
   clickShowHandler = (event) => {
@@ -198,8 +196,8 @@ export default class MintColor extends Component {
             //onMouseMove={this.MouseHover}
             className="Box1"
           />
-           <div
-                       onClick={this.clickColorChangeHandler_2}
+          <div
+            onClick={this.clickColorChangeHandler_2}
             style={{
               backgroundColor: this.state.bgColor_2
             }}
@@ -214,7 +212,7 @@ export default class MintColor extends Component {
             //onMouseMove={this.MouseHover_3}
             className="Box3"
           />
-           <div
+          <div
             onClick={this.clickColorChangeHandler_4}
             style={{
               backgroundColor: this.state.bgColor_4
@@ -222,18 +220,20 @@ export default class MintColor extends Component {
             //onMouseMove={this.MouseHover_3}
             className="Box4"
           />
-          
+
           <Container>
-           
-          <Row className="mt-5 h-50">
-            <Col className="col">
-  <Button onClick={this.clickColorChangeHandler_2} size="lg" variant="primary">Mint</Button>
-  </Col>
-</Row>
-</Container>
+
+            <Row className="mt-5 h-50">
+              <Col className="col">
+                {/* <WalletBalance /> */}
+                <MintButton />
+                <Button onClick={this.clickColorChangeHandler_2} size="lg" variant="primary">Mint</Button>
+              </Col>
+            </Row>
+          </Container>
 
         </div>
-        
+
 
       </>
     );

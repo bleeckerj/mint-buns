@@ -1,12 +1,14 @@
 import Install from './components/Install';
 //import Home from './components/Home';
 import BunMinter from './components/BunMinter';
+import MintColor from './components/MintColor';
+import WalletBalance from './components/WalletBalance';
 
 function App() {
   if (window.ethereum) {
-    return <BunMinter />
+    return <MintColor />
   } else {
-    return <BunMinter />
+    return <Install />
   }
 }
 
